@@ -1,4 +1,4 @@
-<!-- ✅ Sceut 賀卡式香水介紹頁：版本一 LOGO 為主視覺 + 開場動畫 -->
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -13,9 +13,10 @@
       background: linear-gradient(to bottom, #fefaf6, #f7f1eb);
       font-family: 'Noto Sans TC', sans-serif;
       color: #5a4c45;
+      overflow-x: hidden;
     }
 
-    .intro-screen {
+    .envelope {
       position: fixed;
       top: 0;
       left: 0;
@@ -27,14 +28,29 @@
       align-items: center;
       flex-direction: column;
       z-index: 999;
-      transition: opacity 1s ease, transform 1s ease;
+      transition: opacity 1s ease;
+      overflow: hidden;
     }
 
-    .intro-screen h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 28px;
-      color: #a27663;
-      margin-bottom: 20px;
+    .envelope-box {
+      position: relative;
+      width: 240px;
+      height: 180px;
+      perspective: 1000px;
+      margin-bottom: 24px;
+    }
+
+    .envelope-flap {
+      width: 100%;
+      height: 100%;
+      background: url('envelope-icon.png') center/cover no-repeat;
+      transform-style: preserve-3d;
+      transform-origin: left center;
+      transition: transform 1.2s ease-in-out;
+    }
+
+    .envelope.opened .envelope-flap {
+      transform: rotateY(-140deg);
     }
 
     .open-btn {
@@ -62,7 +78,14 @@
       text-align: center;
       position: relative;
       border: 6px dashed #e6dcd3;
-      display: none;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 1.2s ease, transform 1.2s ease;
+    }
+
+    .card.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .logo img {
@@ -153,9 +176,11 @@
   </style>
 </head>
 <body>
-  <div class="intro-screen" id="intro">
-    <h1>Welcome to Sceut</h1>
-    <button class="open-btn" onclick="openCard()">Open Card</button>
+  <div class="envelope" id="intro">
+    <div class="envelope-box" id="envelopeBox">
+      <div class="envelope-flap"></div>
+    </div>
+    <button class="open-btn" onclick="openCard()">open</button>
   </div>
 
   <div class="card" id="mainCard">
@@ -202,11 +227,14 @@
 
   <script>
     function openCard() {
-      document.getElementById('intro').style.opacity = '0';
+      document.getElementById('intro').classList.add('opened');
+      setTimeout(() => {
+        document.getElementById('intro').style.opacity = '0';
+      }, 800);
       setTimeout(() => {
         document.getElementById('intro').style.display = 'none';
-        document.getElementById('mainCard').style.display = 'block';
-      }, 1000);
+        document.getElementById('mainCard').classList.add('show');
+      }, 1600);
     }
 
     let currentSlide = 0;
@@ -219,3 +247,4 @@
   </script>
 </body>
 </html>
+
