@@ -1,0 +1,221 @@
+<!-- ✅ Sceut 賀卡式香水介紹頁：版本一 LOGO 為主視覺 + 開場動畫 -->
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sceut 香氣賀卡</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Noto+Sans+TC&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #fefaf6, #f7f1eb);
+      font-family: 'Noto Sans TC', sans-serif;
+      color: #5a4c45;
+    }
+
+    .intro-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #fffaf5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 999;
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .intro-screen h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      color: #a27663;
+      margin-bottom: 20px;
+    }
+
+    .open-btn {
+      padding: 12px 28px;
+      background: #e8dcd4;
+      border: none;
+      font-size: 16px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-family: 'Playfair Display', serif;
+      transition: all 0.3s ease;
+    }
+
+    .open-btn:hover {
+      background: #d2c3ba;
+    }
+
+    .card {
+      max-width: 720px;
+      margin: 60px auto;
+      background: #ffffff url('lace-border.png') repeat;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      padding: 50px 40px;
+      text-align: center;
+      position: relative;
+      border: 6px dashed #e6dcd3;
+      display: none;
+    }
+
+    .logo img {
+      max-width: 140px;
+      margin-bottom: 20px;
+    }
+
+    h1.brand-line {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      margin-bottom: 30px;
+      color: #a27663;
+    }
+
+    .section {
+      text-align: left;
+      margin-bottom: 40px;
+    }
+
+    .section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: #a27663;
+      margin-bottom: 10px;
+    }
+
+    .section p, .section ul {
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .carousel {
+      position: relative;
+      width: 280px;
+      height: 280px;
+      overflow: hidden;
+      margin: 0 auto 40px auto;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .carousel-track {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s ease;
+    }
+
+    .carousel-track img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border-radius: 12px;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(255, 255, 255, 0.7);
+      border: none;
+      font-size: 26px;
+      padding: 6px 12px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .carousel-btn.left { left: 8px; }
+    .carousel-btn.right { right: 8px; }
+
+    a {
+      color: #a27663;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      font-size: 14px;
+      margin-top: 30px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="intro-screen" id="intro">
+    <h1>Welcome to Sceut</h1>
+    <button class="open-btn" onclick="openCard()">Open Card</button>
+  </div>
+
+  <div class="card" id="mainCard">
+    <div class="logo">
+      <img src="your-logo.png" alt="Sceut Logo">
+    </div>
+    <h1 class="brand-line">Sceut — The scents that suit you best.</h1>
+
+    <div class="section">
+      <h2>香水介紹</h2>
+      <ul>
+        <li><strong>Top Notes:</strong> 白桃、綠蘋果</li>
+        <li><strong>Middle Notes:</strong> 玫瑰、茉莉花</li>
+        <li><strong>Base Notes:</strong> 麝香、琥珀</li>
+      </ul>
+      <p>如初春時節拂過指尖的風，這款香水帶來一縷清新而透明的花果香。香氣輕柔不張揚，揉合白花的純凈與微甜果香，彷彿晨曦中漫步於寧靜花園，腳步輕盈，心也跟著柔軟起來。</p>
+    </div>
+
+    <div class="section">
+      <h2>CANMAKE 品牌介紹</h2>
+      <p>CANMAKE 源自一句簡單卻充滿力量的信念：「Everyone can make it」，相信每個人都擁有創造美麗的能力。品牌香氛多以花果香調為主，清新甜美，融合柔和花香與果實的活力，散發出如初戀般純淨悸動的迷人氛圍，喚醒心中對美與幸福的悸動。</p>
+    </div>
+
+    <div class="carousel">
+      <button class="carousel-btn left" onclick="moveSlide(-1)">‹</button>
+      <div class="carousel-track" id="carouselTrack">
+        <img src="perfume1.jpg" alt="香水1">
+        <img src="perfume2.jpg" alt="香水2">
+        <img src="perfume3.jpg" alt="香水3">
+      </div>
+      <button class="carousel-btn right" onclick="moveSlide(1)">›</button>
+    </div>
+
+    <div class="section">
+      <h2>聯繫我們</h2>
+      <p>Follow us on Instagram: <a href="https://www.instagram.com/sceut_tw" target="_blank">@sceut_tw</a></p>
+      <p>有任何建議或心得，歡迎填寫 <a href="https://forms.gle/KdYS9UmYC8XbVNVs8" target="_blank">回饋表單</a>，讓 Sceut 更加貼近您的感受。</p>
+    </div>
+
+    <footer>
+      Made with love & scent by Sceut
+    </footer>
+  </div>
+
+  <script>
+    function openCard() {
+      document.getElementById('intro').style.opacity = '0';
+      setTimeout(() => {
+        document.getElementById('intro').style.display = 'none';
+        document.getElementById('mainCard').style.display = 'block';
+      }, 1000);
+    }
+
+    let currentSlide = 0;
+    function moveSlide(step) {
+      const track = document.getElementById('carouselTrack');
+      const totalSlides = track.children.length;
+      currentSlide = (currentSlide + step + totalSlides) % totalSlides;
+      track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+  </script>
+</body>
+</html>
