@@ -1,4 +1,4 @@
-<!-- ✅ Sceut 賀卡式香水介紹頁：版本一 LOGO 為主視覺 + 信封開場動畫 -->
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -13,6 +13,7 @@
       background: linear-gradient(to bottom, #fefaf6, #f7f1eb);
       font-family: 'Noto Sans TC', sans-serif;
       color: #5a4c45;
+      overflow-x: hidden;
     }
 
     .envelope {
@@ -31,15 +32,27 @@
       overflow: hidden;
     }
 
-    .envelope img {
-      width: 240px;
-      margin-bottom: 24px;
+    .envelope-box {
+      font-size: 60px;
+      text-align: center;
+      line-height: 1;
+      transition: transform 1.2s ease-in-out;
+      transform-origin: center;
+    }
+
+    .envelope.opened .envelope-box {
+      transform: rotateX(100deg) scale(0.8);
+      opacity: 0;
+    }
+
+    .envelope-box span {
+      display: block;
       animation: float 3s ease-in-out infinite;
     }
 
     @keyframes float {
       0% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
+      50% { transform: translateY(-6px); }
       100% { transform: translateY(0); }
     }
 
@@ -52,6 +65,7 @@
       cursor: pointer;
       font-family: 'Playfair Display', serif;
       transition: all 0.3s ease;
+      margin-top: 20px;
     }
 
     .open-btn:hover {
@@ -68,7 +82,14 @@
       text-align: center;
       position: relative;
       border: 6px dashed #e6dcd3;
-      display: none;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 1.2s ease, transform 1.2s ease;
+    }
+
+    .card.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .logo img {
@@ -160,7 +181,11 @@
 </head>
 <body>
   <div class="envelope" id="intro">
-    <img src="envelope-icon.png" alt="信封開場動畫">
+    <div class="envelope-box" id="envelopeBox">
+      <span>╭━━━╮</span>
+      <span>┃ ╳ ╳ ┃</span>
+      <span>╰━━━╯</span>
+    </div>
     <button class="open-btn" onclick="openCard()">打開信封</button>
   </div>
 
@@ -208,11 +233,14 @@
 
   <script>
     function openCard() {
-      document.getElementById('intro').style.opacity = '0';
+      document.getElementById('intro').classList.add('opened');
+      setTimeout(() => {
+        document.getElementById('intro').style.opacity = '0';
+      }, 800);
       setTimeout(() => {
         document.getElementById('intro').style.display = 'none';
-        document.getElementById('mainCard').style.display = 'block';
-      }, 1000);
+        document.getElementById('mainCard').classList.add('show');
+      }, 1600);
     }
 
     let currentSlide = 0;
@@ -225,3 +253,4 @@
   </script>
 </body>
 </html>
+
